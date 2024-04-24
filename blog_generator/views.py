@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from pytube import YouTube
+from youtube_transcript_api import YouTubeTranscriptApi
+import re
 from django.conf import settings
 import os
 import assemblyai as aai
@@ -20,24 +22,48 @@ def yt_title(link):
 	return title
 
 
-def download_audio(link):
-	yt = YouTube(link)
-	video = yt.streams.filter(only_audio=True).first()
-	out_file = video.download(output_path=settings.MEDIA_ROOT)
-	base, ext = os.path.splitext(out_file)
-	new_file = base + '.mp3'
-	os.rename(out_file, new_file)
-	return new_file
+# def download_audio(link):
+# 	yt = YouTube(link)
+# 	video = yt.streams.filter(only_audio=True).first()
+# 	out_file = video.download(output_path=settings.MEDIA_ROOT)
+# 	base, ext = os.path.splitext(out_file)
+# 	new_file = base + '.mp3'
+# 	os.rename(out_file, new_file)
+# 	return new_file
 
-def get_transcription(link):
-	audio_file = download_audio(link)
-	aai.settings.api_key = "1e1669e6ac4240329338aa1af7bac90e"
+# def get_transcription(link):
+# 	audio_file = download_audio(link)
+# 	aai.settings.api_key = "1e1669e6ac4240329338aa1af7bac90e"
 
-	transcriber = aai.Transcriber()
-	transcript = transcriber.transcribe(audio_file)
+# 	transcriber = aai.Transcriber()
+# 	transcript = transcriber.transcribe(audio_file)
 
-	return transcript.text
+	# return transcript.text
 
+def get_video_id(link):
+    regex = r"(?:v=|youtu\.be/)([\w\-_]+)"
+    match = re.search(regex, link)
+    return match.group(1) if match else None
+
+def get_transcript(video_id):
+	try:
+		transcript = YouTubeTranscriptApi.get_transcript(video_id)
+		if transcript:
+			# Initialize an empty list to store transcript text
+			transcript_text = []
+
+			# Loop through each line of the transcript
+			for line in transcript:
+				# Extract the text from each line
+				text = line['text']
+				transcript_text.append(text)
+
+			# Return the list containing all transcript text lines
+			return transcript_text
+
+	except Exception as e:
+		print(f"Error fetching transcript: {e}")
+		return None
 
 @login_required
 def index(request):
@@ -55,8 +81,11 @@ def generate_blog(request):
 		#Get Youtbe title
 		title = yt_title(yt_link)
 
+		#Get Video id
+		video_id = get_video_id(yt_link)
+
 		#Get Transcript
-		transcript = get_transcription(yt_link)
+		transcript = get_transcript(video_id)
 		if not transcript:
 			return JsonResponse({'error': "Failed to get transcrpt"}, status = 500)
 		

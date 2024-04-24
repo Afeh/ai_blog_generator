@@ -34,7 +34,7 @@ def generate(prompt, temperature=0.7, max_new_tokens=1000, top_p=0.95):
 	)
 
 
-	custom_instructions = "All reponses should be short. Act like you are a professional blog post writer. Don't include a Title. Based on the following transcript from a YouTube video, write a comprehensive blog article, write it based on the transcript, but dont make it look like a youtube video, make it look like a proper blog article:\n\n{transcript}\n\nArticle:"
+	custom_instructions = "All reponses should be very short. Act like you are a professional blog post writer. Don't include a Title, remove if there is one there. Based on the following transcript from a YouTube video, write a comprehensive blog article, write it based on the transcript, but dont make it look like a youtube video, make it look like a proper blog article:\n\n{transcript}\n\nArticle:"
 	formatted_prompt = format_prompt(prompt, custom_instructions)
 
 	client = InferenceClient(API_URL, headers=headers)
