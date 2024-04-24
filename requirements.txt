@@ -9,12 +9,14 @@ certifi==2024.2.2
 charset-normalizer==3.3.2
 dataclasses-json==0.6.4
 distro==1.9.0
+dj-database-url==2.1.0
 Django==5.0.4
 django-environ==0.11.2
 filelock==3.13.4
 frozenlist==1.4.1
 fsspec==2024.3.1
 greenlet==3.0.3
+gunicorn==22.0.0
 h11==0.14.0
 httpcore==1.0.5
 httpx==0.27.0
@@ -35,6 +37,7 @@ numpy==1.26.4
 openai==1.17.0
 orjson==3.10.0
 packaging==23.2
+psycopg2-binary==2.9.9
 pydantic==2.7.0
 pydantic_core==2.18.1
 python-dotenv==1.0.1
