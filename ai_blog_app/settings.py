@@ -6,6 +6,8 @@ env = environ.Env(
 	DEBUG=(bool, False)
 )
 
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,7 +21,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1']#, 
+ALLOWED_HOSTS = ['*']#, 
 
 
 # Application definition
@@ -62,18 +64,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ai_blog_app.wsgi.application'
+WSGI_APPLICATION = 'ai_blog_app.wsgi.app'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -122,3 +124,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 LOGIN_URL ='login'
+
+
+"""Live POSTGRES DATABASE"""
+import dj_database_url
+
+DATABASES = {
+
+	'default': dj_database_url.parse(env('DATABSE_URL'))
+
+}
