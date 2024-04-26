@@ -5,26 +5,120 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 		<title>Blog Post Details</title>
+		<style>
+			header{
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				background: #2563EB;
+				box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+				padding: 10px 7%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				z-index: 1000;
+			}
+
+			header .logo{
+				font-weight: bolder;
+				font-size: 20px;
+				color: white; 
+			}
+
+			header .navbar ul{
+				list-style: none;
+			}
+
+			header .navbar ul li{
+				position: relative;
+				float: left;
+			}
+
+			header .navbar ul li a{
+				font-size: 16px;
+				padding: 10px;
+				color: white;
+				display: block;
+			}
+
+			header .navbar ul li a:hover{
+				background: #2F65DE;
+				color: #ffffff;
+			}
+
+			#menu-bar{
+				display: none;
+			}
+
+			header label{
+				font-size: 16px;
+				color: white
+				cursor: pointer;
+				display: none;
+				padding: 10px;
+			}
+
+			header label:hover{
+				background: #2F65DE;
+				color: #ffffff;
+			}
+			
+
+			@media(max-width:991px){
+				header{
+					padding: 20px;
+				}
+
+				header label{
+					display: initial;
+					color: white;
+					font-weight: bold;
+				}
+
+				header .navbar{
+					position: absolute;
+					top: 100%; left: 0; right: 0;
+					background: #2563EB;
+					border-top: 1px solid rgba(0, 0, 0, .1);
+					display: none;
+				}
+
+				header .navbar ul li{
+					width: 100%;
+				}
+
+				header .navbar ul li{
+					border-top: 1px solid rgba(255, 255, 255, .5);
+				}
+
+				#menu-bar:checked ~ .navbar{
+					display: initial;
+				}
+			}
+
+		</style>
 	</head>
-	<body class="bg-gray-100 font-sans antialised">
 
-		<!--Navbar-->
-		<nav class="bg-blue-600 p-4 text-white flex justify-between">
-			<a href="/">
-				<div>
-					<h1 class="text-3xl font-bold">AI Blog Generator</h1>
-				</div>
-			</a>
+	<body class="bg-gray-100vh font-sans antialised">
 
-			<div>
-				<a href="/" class="text-white hover:underline mx-4">Welcome {{ user.username }}</a>
-				<a href="/blog-list" class="text-white hover:underline mx-4">Saved Blog Posts</a>
-				<a href="logout" class="text-white hover:underline">Logout</a>
-			</div>
-		</nav>
+		<header>
+			<a href= "/" class="logo">AI Blog Generator</a>
+
+			<input type="checkbox" id="menu-bar">
+			<label class="menu" for="menu-bar">Menu</label>
+			<!--Navbar-->
+
+			<nav class="navbar">
+				<ul>
+					<li><a href="/">Welcome {{ user.username }}</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/blog-list">Saved Blog Posts</a></li>
+					<li><a href="logout">Logout</a></li>
+				<ul>
+			</nav>
+		</header>
 	
 		<!-- Main Content -->
-		<div class="container mx-auto mt-10 px-4 sm:px-0">
+		<div class="container mx-auto mt-20 px-4 sm:px-0">
 			<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
 
 				<section>
