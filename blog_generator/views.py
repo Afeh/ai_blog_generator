@@ -14,31 +14,13 @@ import assemblyai as aai
 from .utils import generate
 from .models import BlogPost
 
-#Suprusrpw: user4321
+
 
 def yt_title(link):
 	yt = YouTube(link)
 	title = yt.title
 	return title
 
-
-# def download_audio(link):
-# 	yt = YouTube(link)
-# 	video = yt.streams.filter(only_audio=True).first()
-# 	out_file = video.download(output_path=settings.MEDIA_ROOT)
-# 	base, ext = os.path.splitext(out_file)
-# 	new_file = base + '.mp3'
-# 	os.rename(out_file, new_file)
-# 	return new_file
-
-# def get_transcription(link):
-# 	audio_file = download_audio(link)
-# 	aai.settings.api_key = "1e1669e6ac4240329338aa1af7bac90e"
-
-# 	transcriber = aai.Transcriber()
-# 	transcript = transcriber.transcribe(audio_file)
-
-	# return transcript.text
 
 def get_video_id(link):
     regex = r"(?:v=|youtu\.be/)([\w\-_]+)"
