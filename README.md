@@ -2,13 +2,13 @@
 
 This web app uses [Mistral AI](https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2) to generate a blog post based on the content of a YouTube Video.
 
-[![AI Blog Generator](./public/Ai_blog_app.jpg)](https://ai-blog-generator-1rf1.onrender.com/)
-[![AI Blog Generator](./public/Ai_blog_app2.png)](https://ai-blog-generator-1rf1.onrender.com/)
+[![AI Blog Generator](./public/Ai_blog_app.jpg)](https://ai-blog-generator-1-ce1f.onrender.com/)
+[![AI Blog Generator](./public/Ai_blog_app2.png)](https://ai-blog-generator-1-ce1f.onrender.com/)
 
 
 ## How to use
 
-1. Visit [https://ai-blog-generator-1rf1.onrender.com/](https://ai-blog-generator-1rf1.onrender.com/)
+1. Visit [https://ai-blog-generator-1-ce1f.onrender.com/](https://ai-blog-generator-1-ce1f.onrender.com/)
 2. Create an account with your username and email.
 3. Login with your username and password
 4. In the YouTube Link input field, paste the URL of the YouTube video you want to generate a blog post for.
